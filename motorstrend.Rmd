@@ -53,7 +53,7 @@ Digging deeper, using our initial linear `model.1`, we can see an increase in MP
 `r summary(model.1)$r.squared` r-squared value which doesn't seem sufficient to explain the mpg variability. 
 It seems best considering the dataset includes 10 dimensions, to explore if other variables in addition to transmission `am` have an impact on mpg efficiency.
 
-*Multivariate regression and model selection*
+*II. Multivariable regression and model selection*
 
 To figure out if other predictors do have impact over mpg, we'll start with a model that includes all captured variables in the dataset. 
 We will then proceed with a *setwise model* to see if some preditors could be inferred as having better impact over mpg.
