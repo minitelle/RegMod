@@ -84,7 +84,7 @@ anova(model.1, model.best, model.all)
 In addition an ANOVA analysis of the variance (see point D in the appendix) with all models shows, that model.best has a significant p-value of `1.476e-05` which validates that additional predictors do have an impact on mpg and contribute to the accuracy of the overall model.
 
 ##### Conclusion
-Manual transmission does have an increase of overall mpg performance of 1.80 mpg over automatic transmission, but only when including additional predictor variables to the model that are: cylinder number, horse power and car weight. The variable transmission alone is not sufficient to explain mpg efficiency.
+As it relates to the Motors Trends Magazine dataset, manual transmission does have an increase of overall mpg performance of 1.80 mpg over automatic transmission, but only when including additional predictor variables to the model. These significant variables are: *cylinders*, *horse power* and *car weight*. The variable transmission alone is not sufficient to explain mpg efficiency.
 
 
 \newpage
