@@ -19,12 +19,12 @@ library("ggplot2")
 data("mtcars")
 ```
 ### Executive Summary
-In this exploration, we look at the data from [Motors Trends](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html) magazine collected in 1974 for 32 car models. Our goal is to analyze the potential impact of car transmission types over miles per gallon efficiency by answering two questions:
+In this exploration, we look at the data from [Motors Trends](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html) magazine collected in 1974 for 32 car models. Our goal is to analyze the potential impact of car transmission types over miles per gallon by answering two questions:
 
 - “Is an automatic or manual transmission better for MPG”
 - "Quantify the MPG difference between automatic and manual transmissions"
 
-From the data exploration and completed linear regression, we can conclude that manual transmission cars have a marginal impact over mpg efficiency but not strong enough to be seen as the sole variable predicting mpg efficiency. Our multivariate analysis has shown that instead, a combination of predictors such as: cylinder, weight and horse power including transmission help explain mpg efficiency over manual transmission alone.
+From the data exploration and completed linear regression, we can conclude that manual transmission cars have a marginal impact over mpg efficiency, but not strong enough to be seen as the sole variable predicting mpg efficiency. Our multivariate analysis has shown that instead, a combination of predictors such as: cylinder, weight and horse power including transmission help explain mpg efficiency of manual cars vs. automatic cars.
 
 ##### Data Exploration and Analysis
 The initial analysis will be based on a simple linear regression model with the two variables the question focuses on:
@@ -84,7 +84,7 @@ anova(model.1, model.best, model.all)
 In addition an ANOVA analysis of the variance (see point D in the appendix) with all models shows, that model.best has a significant p-value of `1.476e-05` which validates that additional predictors do have an impact on mpg and contribute to the accuracy of the overall model.
 
 ##### Conclusion
-Manual transmission does have an increase of overall mpg performance of 1.80 mpg efficiency over automatic transmission, but only when including additional predictor variables to the model that are: cylinder number, horse power and car weight. The variable transmission alone is not sufficient to explain mpg efficiency.
+Manual transmission does have an increase of overall mpg performance of 1.80 mpg over automatic transmission, but only when including additional predictor variables to the model that are: cylinder number, horse power and car weight. The variable transmission alone is not sufficient to explain mpg efficiency.
 
 
 \newpage
