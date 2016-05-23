@@ -1,5 +1,5 @@
 ---
-title: Effects of Car Trasmission Types on Miles per Gallon Analysis using Linear
+title: Effects of Car Transmission Types on Miles per Gallon Analysis using Linear
   Regression
 output: pdf_document
 geometry: margin=0.7in
@@ -19,20 +19,20 @@ library("ggplot2")
 data("mtcars")
 ```
 ### Executive Summary
-In this exploration, we look at the data from [Motors Trends](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html) magazine collected in 1974 for 32 car models. Our goal is to analyze the potential impact of car transmission types over miles per gallon efficiencty by answering two questions:
+In this exploration, we look at the data from [Motors Trends](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html) magazine collected in 1974 for 32 car models. Our goal is to analyze the potential impact of car transmission types over miles per gallon efficiency by answering two questions:
 
 - “Is an automatic or manual transmission better for MPG”
 - "Quantify the MPG difference between automatic and manual transmissions"
 
-From the data exploration and completed linear regression, we can conclude that manual transmission cars have a marginal impact over mpg effciency but not strong enough to be seen as the sole variable predicting mpg effciency. Our multivariate analysis has shown that istead, a combination of predictors such as: cylinder, weight and horse power inlcuding transmission help explain mpg effciency over manual transmission alone.
+From the data exploration and completed linear regression, we can conclude that manual transmission cars have a marginal impact over mpg efficiency but not strong enough to be seen as the sole variable predicting mpg efficiency. Our multivariate analysis has shown that instead, a combination of predictors such as: cylinder, weight and horse power including transmission help explain mpg efficiency over manual transmission alone.
 
 ##### Data Exploration and Analysis
 The initial analysis will be based on a simple linear regression model with the two variables the question focuses on:
 
 - `mpg`: Miles/(US) gallon, which will represent the outcome in this linear model.
-- `am`: the car transmission. In our model this will be our predictor variable, which has 2 possible values: 0 = automatic, 1 = manual. (See point A in the appendix.) . Therefore, transmission will be treated as a factor variable.
+- `am`: the car transmission. In our model, this will be our predictor variable, which has 2 possible values: 0 = automatic, 1 = manual. (See point A in the appendix.) . Therefore, transmission will be treated as a factor variable.
 
-Looking further into the dataset (see point A in the appendix.) we can see several variables with levels, therfore, we'll proceed with a quick trasnformation fo these varibales into factors preemtively assumign we will need them for further exploration of our intital model. Said variables are: `cyl`, `gear` and `carb`, and `vs`.
+Looking further into the dataset (see point A in the appendix.) we can see several variables with levels, therefore, we'll proceed with a quick transformation of these variables into factors preemptively assuming we will need them for further exploration of our intital model. Said variables are: `cyl`, `gear` and `carb`, and `vs`.
 ```{r, echo= FALSE}
 mtcars$am <- factor(mtcars$am)
 mtcars$cyl <- factor(mtcars$cyl)
@@ -43,20 +43,20 @@ mtcars$vs <- factor(mtcars$vs)
 
 *I. Initial Model: MPG by transmission predictor*
 
-We'll start by plotting mpg by trasmission type, looking at the box plot (point B in the appendix), we can see that manuals trasmission has a better impact over mpg consumption.
+We'll start by plotting mpg by transmission type, looking at the box plot (point B in the appendix), we can see that manual cars has a better impact over mpg.
 ```{r}
 model.1 <- lm(mpg ~ am, data = mtcars)
 summary(model.1)$coef
 confint(model.1)
 ```
-Digging deeper, using our initial linear `model.1`, we can see an increase in MPG for cars with manual transmissions of `r summary(model.1)$coef[2]` over automatic transmission. Looking as well at the low p-value `0.000285` and that the confidence interval does not include zero, we can reject a null hypothesis of no difference between manual vs. autmatic trasmission. However, looking closer at the model, its fit is pretty low as seen through an 
-`r summary(model.1)$r.squared` r-squared value which doens't seem sufficient to explain the mpg variability. 
-It seems best considering the dataset includes 10 dimensions, to explore if other variables in addition to trasmission `am` have an impact on mpg efficiency.
+Digging deeper, using our initial linear `model.1`, we can see an increase in MPG for cars with manual transmissions of `r summary(model.1)$coef[2]` over automatic transmission. Looking as well at the low p-value `0.000285` and that the confidence interval does not include zero, we can reject a null hypothesis of no difference between manual vs. automatic transmission. However, looking closer at the model, its fit is pretty low as seen through an 
+`r summary(model.1)$r.squared` r-squared value which doesn't seem sufficient to explain the mpg variability. 
+It seems best considering the dataset includes 10 dimensions, to explore if other variables in addition to transmission `am` have an impact on mpg efficiency.
 
 *Multivariate regression and model selection*
 
 To figure out if other predictors do have impact over mpg, we'll start with a model that includes all captured variables in the dataset. 
-We will then proceed with a setwise model to see if some precitors could be inferred as hvaing better impact over mpg.
+We will then proceed with a *setwise model* to see if some preditors could be inferred as having better impact over mpg.
 We'll then conclude with an `ANOVA` comparison of these two models with our initial model.1 that only looked at `mpg` vs. `am`.
 ```{r, results='hide'}
 # All predictors model
@@ -70,7 +70,7 @@ summary(model.best)
 printCoefmat(summary(model.best)$coefficients)
 summary(model.best)$r.squared
 ```
-From the stepwise model resulting `model.best`, we can see that a combination of 4 predictors: cylinder `cyl`, horse power `hp`, weight `wt` and transmission `am` explain about `r summary(model.best)$r.squared` (with an adjusted r squared of ~84%) of the mpg variance. We can see the p-value for `cyl`, horse power `hp`, weight `wt` are quite significant in their contribution to the accuracy of the model especially if compared to trasmission `am`. 
+From the stepwise model resulting `model.best`, we can see that a combination of 4 predictors: cylinder `cyl`, horse power `hp`, weight `wt` and transmission `am` explain about `r summary(model.best)$r.squared` (with an adjusted r squared of ~84%) of the mpg variance. We can see the p-value for `cyl`, horse power `hp`, weight `wt` are quite significant in their contribution to the accuracy of the model especially if compared to transmission `am`. 
 
 Looking further at the *Residuals* (see point D in the appendix), we can see from plotting the model.best that:
 
@@ -84,13 +84,13 @@ anova(model.1, model.best, model.all)
 In addition an ANOVA analysis of the variance (see point D in the appendix) with all models shows, that model.best has a significant p-value of `1.476e-05` which validates that additional predictors do have an impact on mpg and contribute to the accuracy of the overall model.
 
 ##### Conclusion
-Manual trasmission does have an increase of overall mpg performance of 1.80 mpg effiency over automatic transmission, but only when including additional predictor variables to the model that are: cylinder number, horse power and car weight. The variable transmission alone is not sufficient to explain mpg efficiency.
+Manual transmission does have an increase of overall mpg performance of 1.80 mpg efficiency over automatic transmission, but only when including additional predictor variables to the model that are: cylinder number, horse power and car weight. The variable transmission alone is not sufficient to explain mpg efficiency.
 
 
 \newpage
 
 ### Appendix
-To see all R Code please find the [Rmd file](http://github.com/minitelle/regmod/motorstrend.rmd).
+To see all R Code please find the [Rmd file](https://github.com/minitelle/RegMod/blob/master/motorstrend.Rmd).
 
 #####A. List of variables used in analysis:
 
@@ -99,35 +99,31 @@ To see all R Code please find the [Rmd file](http://github.com/minitelle/regmod/
 - wt: car weight /1000lb
 - cyl: engine cylinder
 - hp: engine horse power
+
 Source: https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html
 
 ###### Sample Data
 ```{r}
 data("mtcars")
-head(mtcars, n=4)
+head(mtcars, n=5)
+# Pais Graph to detect other predictors besides am
+pairs(mtcars, panel=panel.smooth, main="Pair Graph of Motor Trend Car Road Tests")
 ```
 
-####B. Figure 1 - MPG by Trasmission type
-```{r, echo = FALSE, fig.height=4}
+####B. Figure 1 - MPG by Transmission type
+```{r, echo = FALSE}
 boxplot(mpg~am,data=mtcars, col=c("turquoise","tomato"),
-        xlab="Fig 1. Transmission Type : 0-Automatic, 1-Manual",ylab="Mileage mpg",
+        xlab="Fig 1. Transmission Type : 0-Automatic, 1-Manual",
+        ylab="Mileage mpg",
         main="MPG by Trasmission type")
 ```
 
 #####C. Residual plot for model.best (mpg ~ cyl + hp + wt + am)
-```{r, , echo=FALSE}
-# plot best model
-par(mfrow = c(2, 2))
-plot(model.best)
+```{r}
+par(mfrow = c(2, 2)); plot(model.best)
 ```
 
 #####D. ANOVA comparing (mpg ~am) vs. (mpg ~ cyl + hp + wt + am) vs. (mpg ~ .)
 ```{r}
 anova(model.1, model.best, model.all)
 ```
-
-####E. Pairs graph for all predictors in the mtcars dataset
-```{r}
-pairs(mtcars, panel=panel.smooth, main="Pair Graph of Motor Trend Car Road Tests")
-```
-
